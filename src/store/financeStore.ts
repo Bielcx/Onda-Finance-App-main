@@ -16,7 +16,7 @@ interface FinanceState {
 export const useFinanceStore = create<FinanceState>()(
   persist(
     (set) => ({
-      balance: 12450.0,
+      balance: 15000.0, //valor fixo no estado inicial
       transactions: [],
       setTransactions: (transactions) => set({ transactions }),
       makeTransfer: (payload) =>

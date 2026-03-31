@@ -3,11 +3,7 @@ import type { Transaction } from "@/types";
 
 const api = axios.create({ baseURL: "" });
 
-// Mock interceptor — intercepts requests and returns fake data
-api.interceptors.request.use((config) => {
-  // We'll handle responses in the response interceptor
-  return config;
-});
+// Mock — intercepts requests and returns fake data
 
 const mockTransactions: Transaction[] = [
   { id: "1", type: "credit", description: "Pix recebido - João Silva", amount: 1500.0, date: "2025-03-28T10:30:00", category: "pix" },
@@ -23,7 +19,7 @@ const mockTransactions: Transaction[] = [
 ];
 
 export async function fetchTransactions(): Promise<Transaction[]> {
-  // Simulate network delay
+  // Simula network delay
   await new Promise((res) => setTimeout(res, 500));
   return mockTransactions;
 }
