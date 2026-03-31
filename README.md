@@ -18,8 +18,8 @@ Aplicação web simulando um app bancário moderno, desenvolvida como desafio t�
 
 ### Instalação
 ```bash
-git clone https://github.com/Bielcx/onda-wave-pay.git
-cd onda-wave-pay
+git clone https://github.com/Bielcx/Onda-Finance-App-main.git
+cd Onda-Finance-App-main
 npm install
 npm run dev
 ```
