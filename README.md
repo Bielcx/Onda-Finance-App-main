@@ -6,6 +6,10 @@ Aplicação web simulando um app bancário moderno, desenvolvida como desafio t�
 
 ---
 
+## 📸 Preview
+
+![Dashboard do Onda Finance](./public/dash.png)
+
 ## 🚀 Como rodar o projeto
 
 ### Pré-requisitos
