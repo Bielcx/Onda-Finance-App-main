@@ -2,7 +2,7 @@
 
 Aplicação web simulando um app bancário moderno, desenvolvida como desafio técnico para a vaga de Front-End Developer.
 
-🔗 **[Acesse o app aqui](https://onda-wave-pay.vercel.app)**
+🔗 **[Acesse o app aqui](https://onda-finance-app-main.vercel.app)**
 
 ---
 
