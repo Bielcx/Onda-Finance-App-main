@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(head *)",
+      "PowerShell(ls \"C:\\\\Users\\\\bielc\\\\OneDrive\\\\Área de Trabalho\\\\Onda-Finance-App-main\\\\src\\\\test\" 2>$null; if \\($LASTEXITCODE -ne 0\\) { \"Test directory not found\" })",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}
