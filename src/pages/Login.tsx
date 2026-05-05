@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,7 +25,9 @@ export default function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>({
+  useEffect(() => { document.title = "Login — Onda Finance"; }, []);
+
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
   });
 
@@ -43,6 +45,11 @@ export default function Login() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const fillDemoCredentials = () => {
+    setValue("email", "gabriel@onda.finance");
+    setValue("password", "senha123");
   };
 
   return (
@@ -102,9 +109,11 @@ export default function Login() {
           </form>
         </div>
 
-        <p className="mt-4 text-center text-xs text-muted-foreground">
-          Demo: gabriel@onda.finance / senha123
-        </p>
+        <div className="mt-4 flex justify-center">
+          <Button variant="ghost" size="sm" onClick={fillDemoCredentials} className="text-xs text-muted-foreground">
+            Usar credenciais demo
+          </Button>
+        </div>
       </div>
       <Footer />
     </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,6 +34,8 @@ export default function Transfer() {
   const { balance, makeTransfer } = useFinanceStore();
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => { document.title = "Nova Transferência — Onda Finance"; }, []);
+
   const schema = createTransferSchema(balance);
 
   const { register, handleSubmit, formState: { errors } } = useForm<TransferFormData>({
@@ -44,9 +46,9 @@ export default function Transfer() {
     setLoading(true);
     try {
       const payload = {
-        recipientName: data.recipientName!,
-        recipientKey: data.recipientKey!,
-        amount: data.amount!,
+        recipientName: data.recipientName,
+        recipientKey: data.recipientKey,
+        amount: data.amount,
         description: data.description,
       };
       await submitTransfer(payload);

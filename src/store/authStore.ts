@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import type { User } from "@/types";
 
 interface AuthState {
@@ -8,18 +9,14 @@ interface AuthState {
   logout: () => void;
 }
 
-const stored = localStorage.getItem("onda-auth");
-const initial = stored ? JSON.parse(stored) : null;
-
-export const useAuthStore = create<AuthState>((set) => ({
-  user: initial?.user ?? null,
-  isAuthenticated: !!initial?.user,
-  login: (user) => {
-    localStorage.setItem("onda-auth", JSON.stringify({ user }));
-    set({ user, isAuthenticated: true });
-  },
-  logout: () => {
-    localStorage.removeItem("onda-auth");
-    set({ user: null, isAuthenticated: false });
-  },
-}));
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      user: null,
+      isAuthenticated: false,
+      login: (user) => set({ user, isAuthenticated: true }),
+      logout: () => set({ user: null, isAuthenticated: false }),
+    }),
+    { name: "onda-auth" }
+  )
+);

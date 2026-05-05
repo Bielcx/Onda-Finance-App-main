@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/authStore";
@@ -59,16 +59,19 @@ export default function Dashboard() {
   const [showBalance, setShowBalance] = useState(true);
   const [filter, setFilter] = useState<FilterType>("all");
 
-  const { isLoading } = useQuery({
+  useEffect(() => { document.title = "Dashboard — Onda Finance"; }, []);
+
+  const { data: fetchedTransactions, isLoading } = useQuery({
     queryKey: ["transactions"],
-    queryFn: async () => {
-      const data = await fetchTransactions();
-      // Só popula se ainda não tiver transações salvas (evita sobrescrever após transferências)
-      if (transactions.length === 0) setTransactions(data);
-      return data;
-    },
+    queryFn: fetchTransactions,
     staleTime: Infinity,
   });
+
+  useEffect(() => {
+    if (fetchedTransactions && transactions.length === 0) {
+      setTransactions(fetchedTransactions);
+    }
+  }, [fetchedTransactions]);
 
   const filteredTx = transactions.filter((tx) =>
     filter === "all" ? true : tx.type === filter
